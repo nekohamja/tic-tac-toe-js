@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js" defer></script>
+    <title>Tic-Tac-Toe</title>
+  </head>
+  <body>
+    <div class="container">
+      <section class="select-mode active">
+        <p>Choose mode!</p>
+        <button id="ai-mode">With AI</button>
+        <button id="friend-mode">With a friend</button>
+      </section>
+
+      <section class="select-side">
+        <p>Pick your side!</p>
+        <div>
+          <button id="X">X</button>
+          <button id="O">O</button>
+        </div>
+        <button id="back">Go back</button>
+      </section>
+
+      <section class="game">
+        <p id="message">Game Start!</p>
+
+        <header>
+          <p>You</p>
+          <div class="scoreboard">
+            <p id="player-score">0</p>
+            <hr />
+            <p id="opponent-score">0</p>
+          </div>
+          <p id="opponent">AI</p>
+        </header>
+
+        <div class="border">
+          <div class="board">
+            <div box></div>
+            <div box></div>
+            <div box></div>
+
+            <div box></div>
+            <div box></div>
+            <div box></div>
+
+            <div box></div>
+            <div box></div>
+            <div box></div>
+          </div>
+        </div>
+
+        <footer>
+          <button id="restart">Restart</button>
+          <button id="menu">Main Menu</button>
+        </footer>
+      </section>
+    </div>
+  </body>
+</html>

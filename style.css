@@ -1,0 +1,139 @@
+/* VARIABLES */
+:root {
+  --system-font: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  --font-family: "IBM Plex Sans", sans-serif;
+  --font-color: #3d3a66;
+  --color-primary: #eaeaec;
+  --color-secondary: white;
+  --box-shadow-button: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  --box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  --board-gradient: radial-gradient(
+    circle,
+    rgba(181, 181, 190, 1) 0%,
+    rgba(234, 234, 236, 1) 55%,
+    rgba(255, 255, 255, 1) 75%
+  );
+}
+
+/* DEFAULTS */
+html {
+  line-height: 1.15;
+  -webkit-text-size-adjust: 100%;
+  font-family: var(--font-family), var(--system-font);
+}
+body {
+  height: 98vh;
+  margin: 0;
+}
+p {
+  margin: 0;
+  font-size: clamp(1rem, 1vw, 1.5rem);
+  color: var(--font-color);
+}
+hr {
+  margin-left: 8px;
+  margin-right: 8px;
+  width: 10px;
+}
+header {
+  display: flex;
+  align-items: center;
+}
+button {
+  border: none;
+  border-radius: 12px;
+  padding: 12px 24px;
+  color: var(--font-color);
+  background: var(--color-secondary);
+  box-shadow: var(--box-shadow-button);
+  transition: all 0.25s ease;
+}
+button:hover {
+  cursor: pointer;
+  transform: translate(0, -4px);
+}
+
+/* LAYOUT */
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background: var(--color-primary);
+}
+
+section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: clamp(0px, 45%, 60vw);
+  gap: 22px;
+  padding: 22px;
+  border-radius: 12px;
+}
+
+.scoreboard {
+  display: flex;
+  font-weight: bold;
+  box-shadow: var(--box-shadow);
+  background: var(--color-secondary);
+  padding: 4px 8px;
+  border-radius: 8px;
+  margin: 0px 48px;
+}
+
+.select-mode {
+  display: none;
+}
+
+.select-side {
+  display: none;
+}
+
+.game {
+  display: none;
+  .border {
+    width: 100%;
+    background: var(--board-gradient);
+    border-radius: 8px;
+    .board {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(50px, 1fr));
+      box-shadow: var(--box-shadow);
+      background: var(--color-secondary);
+      background: none;
+      overflow: hidden;
+      gap: 2px;
+      border-radius: 8px;
+      > div {
+        background: white;
+        aspect-ratio: 1;
+        transition: all 0.25s ease;
+      }
+      > div:hover {
+        border-radius: 12px;
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+.select-mode.active,
+.select-side.active,
+.game.active {
+  display: flex;
+}
+
+/* MEDIA QUERIES */
+@media only screen and (max-width: 425px) {
+  section {
+    width: 100%;
+  }
+}
+@media only screen and (min-width: 1440px) {
+  section {
+    width: 512px;
+  }
+}
