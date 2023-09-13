@@ -77,7 +77,7 @@ section {
 .scoreboard {
   display: flex;
   font-weight: bold;
-  box-shadow: var(--box-shadow);
+  box-shadow: var(--box-shadow-button);
   background: var(--color-secondary);
   padding: 4px 8px;
   border-radius: 8px;
@@ -96,20 +96,17 @@ section {
   display: none;
   .border {
     width: 100%;
+    overflow: hidden;
     background: var(--board-gradient);
+    box-shadow: var(--box-shadow);
     border-radius: 8px;
     .board {
       display: grid;
       grid-template-columns: repeat(3, minmax(50px, 1fr));
-      box-shadow: var(--box-shadow);
-      background: var(--color-secondary);
-      background: none;
-      overflow: hidden;
       gap: 2px;
-      border-radius: 8px;
       > div {
         background: white;
-        aspect-ratio: 1;
+        aspect-ratio: 1/1;
         transition: all 0.25s ease;
       }
       > div:hover {
