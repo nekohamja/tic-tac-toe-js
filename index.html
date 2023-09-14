@@ -10,6 +10,7 @@
   <body>
     <div class="container">
       <section class="select-mode active">
+        <h1 class="logo"><span class="X">X</span><span class="O">O</span></h1>
         <p>Choose mode!</p>
         <button id="ai-mode">With AI</button>
         <button id="friend-mode">With a friend</button>
@@ -18,8 +19,12 @@
       <section class="select-side">
         <p>Pick your side!</p>
         <div>
-          <button id="X">X</button>
-          <button id="O">O</button>
+          <button id="X">
+            <h1><span class="X">X</span></h1>
+          </button>
+          <button id="O">
+            <h1><span class="O">O</span></h1>
+          </button>
         </div>
         <button id="back">Go back</button>
       </section>
@@ -28,28 +33,36 @@
         <p id="message">Game Start!</p>
 
         <header>
-          <p>You</p>
+          <div>
+            <p class="player-side"><span>--</span></p>
+            <p>You</p>
+          </div>
+
           <div class="scoreboard">
             <p id="player-score">0</p>
             <hr />
             <p id="opponent-score">0</p>
           </div>
-          <p id="opponent">AI</p>
+
+          <div>
+            <p class="opponent-side"><span>--</span></p>
+            <p id="opponent">--</p>
+          </div>
         </header>
 
         <div class="border">
           <div class="board">
-            <div box></div>
-            <div box></div>
-            <div box></div>
+            <div box-index="0"></div>
+            <div box-index="1"></div>
+            <div box-index="2"></div>
 
-            <div box></div>
-            <div box></div>
-            <div box></div>
+            <div box-index="3"></div>
+            <div box-index="4"></div>
+            <div box-index="5"></div>
 
-            <div box></div>
-            <div box></div>
-            <div box></div>
+            <div box-index="6"></div>
+            <div box-index="7"></div>
+            <div box-index="8"></div>
           </div>
         </div>
 

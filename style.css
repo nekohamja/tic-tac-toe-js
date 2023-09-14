@@ -6,6 +6,8 @@
   --font-color: #3d3a66;
   --color-primary: #eaeaec;
   --color-secondary: white;
+  --x-color: orange;
+  --o-color: blue;
   --box-shadow-button: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
   --box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   --board-gradient: radial-gradient(
@@ -23,7 +25,7 @@ html {
   font-family: var(--font-family), var(--system-font);
 }
 body {
-  height: 98vh;
+  height: 100vh;
   margin: 0;
 }
 p {
@@ -31,15 +33,22 @@ p {
   font-size: clamp(1rem, 1vw, 1.5rem);
   color: var(--font-color);
 }
+h1 {
+  margin: 0;
+  font-size: clamp(3rem, 5vw, 5rem);
+}
 hr {
   margin-left: 8px;
   margin-right: 8px;
   width: 10px;
 }
-header {
-  display: flex;
-  align-items: center;
+span.X {
+  color: var(--x-color);
 }
+span.O {
+  color: var(--o-color);
+}
+
 button {
   border: none;
   border-radius: 12px;
@@ -74,6 +83,23 @@ section {
   border-radius: 12px;
 }
 
+header {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(50px, 1fr));
+  justify-items: center;
+  align-items: center;
+  width: 100%;
+  > div:not(.scoreboard) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .player-side,
+    .opponent-side {
+      font-weight: bold;
+    }
+  }
+}
+
 .scoreboard {
   display: flex;
   font-weight: bold;
@@ -81,17 +107,14 @@ section {
   background: var(--color-secondary);
   padding: 4px 8px;
   border-radius: 8px;
-  margin: 0px 48px;
 }
 
 .select-mode {
   display: none;
 }
-
 .select-side {
   display: none;
 }
-
 .game {
   display: none;
   .border {
@@ -116,7 +139,6 @@ section {
     }
   }
 }
-
 .select-mode.active,
 .select-side.active,
 .game.active {
