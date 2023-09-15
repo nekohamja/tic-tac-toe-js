@@ -8,6 +8,7 @@
   --color-secondary: white;
   --x-color: orange;
   --o-color: blue;
+  --button-active: #ebf0ff;
   --box-shadow-button: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
   --box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   --board-gradient: radial-gradient(
@@ -128,9 +129,24 @@ header {
       grid-template-columns: repeat(3, minmax(50px, 1fr));
       gap: 2px;
       > div {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: clamp(4rem, 7vw, 8rem);
+        color: var(--color-secondary);
+        font-weight: bold;
         background: white;
         aspect-ratio: 1/1;
         transition: all 0.25s ease;
+      }
+      > div.X {
+        color: var(--x-color);
+      }
+      > div.O {
+        color: var(--o-color);
+      }
+      > div.disabled {
+        pointer-events: none;
       }
       > div:hover {
         border-radius: 12px;
@@ -143,6 +159,14 @@ header {
 .select-side.active,
 .game.active {
   display: flex;
+}
+#restart {
+  pointer-events: none;
+  opacity: 0.5;
+}
+#restart.active {
+  pointer-events: auto;
+  opacity: 1;
 }
 
 /* MEDIA QUERIES */
