@@ -5,6 +5,8 @@ const game = (() => {
   const opponentScore = document.querySelector("#opponent-score");
   const opponent = document.querySelector("#opponent");
   const button = document.querySelector("#restart");
+  const border = document.querySelector(".border");
+  const scoreboard = document.querySelector(".scoreboard");
   const boxes = document.querySelectorAll("[box-index]");
 
   let playerTurn = true;
@@ -38,7 +40,7 @@ const game = (() => {
       if (button.classList.contains("active")) return;
       else {
         const currentTurn = playerTurn ? SIDE_X : SIDE_O;
-        addTurn(AiLogic.bestChoice(), currentTurn);
+        addTurn(ai.bestChoice(), currentTurn);
         if (checkWin(currentTurn)) {
           endRound(false, currentTurn);
           endGame(currentTurn);
@@ -51,6 +53,7 @@ const game = (() => {
   const addTurn = (box, currentTurn) => {
     box.textContent = currentTurn;
     box.classList.add(currentTurn);
+    box.classList.add("disabled");
   };
 
   const swapTurn = () => {
@@ -81,6 +84,8 @@ const game = (() => {
     if (draw == true) {
       display.msg("", "Draw!");
     } else {
+      border.classList.add(currentTurn);
+      scoreboard.classList.add(currentTurn);
       display.msg(currentTurn, "won the round!");
       if (currentTurn == "X") {
         playerPoints++;
@@ -115,6 +120,10 @@ const game = (() => {
     }
     display.msg("X", "turn!");
     button.classList.remove("active");
+    border.classList.remove(SIDE_O);
+    border.classList.remove(SIDE_X);
+    scoreboard.classList.remove(SIDE_O);
+    scoreboard.classList.remove(SIDE_X);
   };
 
   const clearScore = () => {
@@ -212,14 +221,18 @@ const display = (() => {
   return { screen, sides, msg, mainmenu };
 })();
 
-const AiLogic = (() => {
+const ai = (() => {
   const findEmptyboxes = () => {
     return document.querySelectorAll(".board>div:not(.X):not(.O)");
   };
 
   const bestChoice = () => {
-    // basic turn atm
     return findEmptyboxes()[0];
+    // return minimax(findEmptyboxes()).index;
+  };
+
+  const minimax = (newBoard, player) => {
+    let availableSpots = findEmptyboxes();
   };
 
   return { bestChoice };

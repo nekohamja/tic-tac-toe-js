@@ -6,14 +6,26 @@
   --font-color: #3d3a66;
   --color-primary: #eaeaec;
   --color-secondary: white;
-  --x-color: orange;
-  --o-color: blue;
+  --x-color: rgba(254, 131, 80, 1);
+  --o-color: rgba(85, 80, 254, 1);
   --button-active: #ebf0ff;
   --box-shadow-button: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
   --box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   --board-gradient: radial-gradient(
     circle,
     rgba(181, 181, 190, 1) 0%,
+    rgba(234, 234, 236, 1) 55%,
+    rgba(255, 255, 255, 1) 75%
+  );
+  --board-gradient-x: radial-gradient(
+    circle,
+    rgba(254, 131, 80, 1) 0%,
+    rgba(234, 234, 236, 1) 55%,
+    rgba(255, 255, 255, 1) 75%
+  );
+  --board-gradient-o: radial-gradient(
+    circle,
+    rgba(85, 80, 254, 1) 0%,
     rgba(234, 234, 236, 1) 55%,
     rgba(255, 255, 255, 1) 75%
   );
@@ -36,7 +48,7 @@ p {
 }
 h1 {
   margin: 0;
-  font-size: clamp(3rem, 5vw, 5rem);
+  font-size: clamp(4rem, 5vw, 7rem);
 }
 hr {
   margin-left: 8px;
@@ -45,9 +57,33 @@ hr {
 }
 span.X {
   color: var(--x-color);
+  background-color: var(--x-color);
+  background-image: linear-gradient(
+    37deg,
+    rgba(254, 131, 80, 1) 36%,
+    rgba(253, 156, 45, 1) 73%,
+    rgba(255, 236, 135, 1) 91%
+  );
+  background-size: 100%;
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-text-fill-color: transparent;
 }
 span.O {
   color: var(--o-color);
+  background-color: var(--x-color);
+  background-image: linear-gradient(
+    37deg,
+    rgba(80, 95, 254, 1) 36%,
+    rgba(45, 112, 253, 1) 73%,
+    rgba(135, 204, 255, 1) 91%
+  );
+  background-size: 100%;
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-text-fill-color: transparent;
 }
 
 button {
@@ -57,6 +93,7 @@ button {
   color: var(--font-color);
   background: var(--color-secondary);
   box-shadow: var(--box-shadow-button);
+  font-size: clamp(1rem, 1vw, 1.5rem);
   transition: all 0.25s ease;
 }
 button:hover {
@@ -97,6 +134,7 @@ header {
     .player-side,
     .opponent-side {
       font-weight: bold;
+      font-size: clamp(2rem, 5vw, 5rem);
     }
   }
 }
@@ -108,6 +146,12 @@ header {
   background: var(--color-secondary);
   padding: 4px 8px;
   border-radius: 8px;
+}
+.scoreboard.X {
+  border: 2px inset var(--x-color);
+}
+.scoreboard.O {
+  border: 2px inset var(--o-color);
 }
 
 .select-mode {
@@ -124,6 +168,7 @@ header {
     background: var(--board-gradient);
     box-shadow: var(--box-shadow);
     border-radius: 8px;
+    transition: all 0.25s ease;
     .board {
       display: grid;
       grid-template-columns: repeat(3, minmax(50px, 1fr));
@@ -132,7 +177,7 @@ header {
         display: flex;
         justify-content: center;
         align-items: center;
-        font-size: clamp(4rem, 7vw, 8rem);
+        font-size: clamp(4rem, 6vw, 7rem);
         color: var(--color-secondary);
         font-weight: bold;
         background: white;
@@ -153,6 +198,12 @@ header {
         cursor: pointer;
       }
     }
+  }
+  .border.X {
+    background: var(--board-gradient-x);
+  }
+  .border.O {
+    background: var(--board-gradient-o);
   }
 }
 .select-mode.active,
