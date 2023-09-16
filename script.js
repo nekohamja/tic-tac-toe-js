@@ -4,7 +4,6 @@ const game = (() => {
   const playerScore = document.querySelector("#player-score");
   const opponentScore = document.querySelector("#opponent-score");
   const opponent = document.querySelector("#opponent");
-  const opponentSide = document.querySelector(".opponent-side");
   const button = document.querySelector("#restart");
   const boxes = document.querySelectorAll("[box-index]");
 
@@ -28,19 +27,25 @@ const game = (() => {
     const box = e.target;
     const currentTurn = playerTurn ? SIDE_X : SIDE_O;
     addTurn(box, currentTurn);
-
-    //AI
-    if (opponent.textContent == "AI") {
-      playerTurn = !playerTurn;
-      const currentTurn = playerTurn ? SIDE_X : SIDE_O;
-      AiLogic.chooseTurn(currentTurn);
-    }
-
     if (checkWin(currentTurn)) {
       endRound(false, currentTurn);
       endGame(currentTurn);
     } else if (isDraw()) endRound(true);
     else swapTurn();
+
+    //if opponent is AI, makes turn
+    if (opponent.textContent == "AI") {
+      if (button.classList.contains("active")) return;
+      else {
+        const currentTurn = playerTurn ? SIDE_X : SIDE_O;
+        addTurn(AiLogic.bestChoice(), currentTurn);
+        if (checkWin(currentTurn)) {
+          endRound(false, currentTurn);
+          endGame(currentTurn);
+        } else if (isDraw()) endRound(true);
+        else swapTurn();
+      }
+    }
   };
 
   const addTurn = (box, currentTurn) => {
@@ -208,22 +213,14 @@ const display = (() => {
 })();
 
 const AiLogic = (() => {
-  const boxes = document.querySelectorAll("[box-index]");
-
-  const chooseTurn = (currentTurn) => {
-    const value = Math.floor(Math.random() * (7 + 1));
-    // sample ai attack (worked)
-    if (
-      boxes[value].classList.contains("X") ||
-      boxes[value].classList.contains("O")
-    ) {
-      chooseTurn(currentTurn);
-      console.log(value);
-    } else {
-      boxes[value].classList.add(currentTurn);
-      boxes[value].textContent = `${currentTurn}`;
-      boxes[value].classList.add("disabled");
-    }
+  const findEmptyboxes = () => {
+    return document.querySelectorAll(".board>div:not(.X):not(.O)");
   };
-  return { chooseTurn };
+
+  const bestChoice = () => {
+    // basic turn atm
+    return findEmptyboxes()[0];
+  };
+
+  return { bestChoice };
 })();
